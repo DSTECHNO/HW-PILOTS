@@ -229,7 +229,7 @@ st.markdown("""
 
 st.title("Thermal Twin for Aalborg University (AAU) Pilot")
 
-HF_USER = "<USER>"  # örn: "DSTECHNO"
+HF_USER = "mkuzaay"  # örn: "DSTECHNO"
 NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCase.npz"
 VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCase.vtk"
 
