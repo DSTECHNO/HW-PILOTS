@@ -394,7 +394,7 @@ if view_tab == "About":
 
     # AAU Building Image
     st.image(
-        "https://github.com/DSTECHNO/HW-PILOTS/blob/main/AAU/aau.png",
+        "https://raw.githubusercontent.com/DSTECHNO/HW_PILOTS/main/AAU/aau.png",
         caption="AAU BUILD - Institut for Byggeri, By og Miljø",
         width=500
     )
