@@ -31,9 +31,17 @@ def ensure_file(url: str, local_path: str) -> str:
 def load_npz_case(npz_filename: str, vtk_filename: str):
     data = np.load(npz_filename)
     mesh = pv.read(vtk_filename)
-    files = list(data.files)
-    T = data["T"] if "T" in files else None
-    U = data["U"] if "U" in files else None
+
+    keys = list(data.files)
+    st.sidebar.write("NPZ keys:", keys)   # <- bunu görünce anahtar adını anlayacağız
+
+    T = data["T"] if "T" in keys else None
+    U = data["U"] if "U" in keys else None
+
+    if T is not None:
+        st.sidebar.write("T shape:", getattr(T, "shape", None))
+    if U is not None:
+        st.sidebar.write("U shape:", getattr(U, "shape", None))
 
     return mesh, T, U
 # -------------------------------------------------
@@ -98,17 +106,17 @@ def interpolate_slice(axis1_s, axis2_s, f_s, grid_resolution):
     
     return grid_axis1, grid_axis2, grid_field
 
-def get_coords_and_field(field, U_field, field_choice: str):
-    # Field'i üret
+def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
     if field_choice == "Temperature":
+        if T_field is None:
+            raise ValueError("NPZ does not contain 'T'. Check NPZ keys in sidebar.")
         field = T_field - 273.15
         color_label = "T [°C]"
     else:
+        if U_field is None:
+            raise ValueError("NPZ does not contain 'U'. Check NPZ keys in sidebar.")
         field = np.linalg.norm(U_field, axis=1)
         color_label = "|U| [m/s]"
-
-    if field is None:
-        raise ValueError("Selected field is None (missing in NPZ).")
 
     if len(field) == mesh.n_cells:
         pts = mesh.cell_centers().points
@@ -116,13 +124,11 @@ def get_coords_and_field(field, U_field, field_choice: str):
         pts = mesh.points
     else:
         raise ValueError(
-            f"Field length ({len(field)}) != n_cells ({mesh.n_cells}) and != n_points ({mesh.n_points}). "
-            "NPZ field and VTK mesh are not aligned."
+            f"Field length ({len(field)}) != n_cells ({mesh.n_cells}) and != n_points ({mesh.n_points})."
         )
 
     x, y, z = pts[:, 0], pts[:, 1], pts[:, 2]
     return x, y, z, field, color_label
-
 
 # -------------------------------------------------
 # DENSITY-AWARE DOWNSAMPLING (MESH SIKLIĞINA GÖRE)
