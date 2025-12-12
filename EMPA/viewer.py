@@ -4,7 +4,27 @@ import plotly.graph_objects as go
 from pyvista import UnstructuredGrid
 import pyvista as pv
 from scipy.interpolate import griddata
+import os
+import requests
 
+@st.cache_data(show_spinner=False)
+def ensure_file(url: str, local_path: str) -> str:
+    os.makedirs(os.path.dirname(local_path) or ".", exist_ok=True)
+
+    if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
+        return local_path
+
+    r = requests.get(url, stream=True, timeout=180)
+    r.raise_for_status()
+
+    tmp = local_path + ".part"
+    with open(tmp, "wb") as f:
+        for chunk in r.iter_content(chunk_size=1024 * 1024):
+            if chunk:
+                f.write(chunk)
+    os.replace(tmp, local_path)
+    return local_path
+    
 # -------------------------------------------------
 # NPZ LOAD
 # -------------------------------------------------
@@ -78,7 +98,7 @@ def interpolate_slice(axis1_s, axis2_s, f_s, grid_resolution):
     
     return grid_axis1, grid_axis2, grid_field
 
-def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
+def get_coords_and_field(field, U_field, field_choice: str):
     # Field'i üret
     if field_choice == "Temperature":
         field = T_field - 273.15
@@ -232,7 +252,16 @@ st.markdown("""
 
 st.title("Thermal Twin for EMPA Pilot")
 
-mesh, T_field, U_field = load_npz_case("validationCase.npz", "validationCase.vtk")
+HF_USER = "mkuzaay"  # örn: "DSTECHNO"
+
+NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseEMPA.npz"
+VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseEMPA.vtk"
+
+npz_path = ensure_file(NPZ_URL, "data/validationCase.npz")
+vtk_path = ensure_file(VTK_URL, "data/validationCase.vtk")
+
+mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
+
 
 x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "Temperature")
 total_cells = x.size
@@ -467,7 +496,7 @@ elif view_tab == "Thermal Twin":
 
                         # --- OUTER GEOMETRY FROM VTK AS TRANSPARENT SHELL ---
             try:
-                gx, gy, gz, gi, gj, gk = load_outer_geometry("validationCase.vtk")
+                gx, gy, gz, gi, gj, gk = load_outer_geometry(vtk_path)
 
                 fig.add_trace(go.Mesh3d(
                     x=gx,
@@ -626,7 +655,7 @@ elif view_tab == "Thermal Twin":
 
                     # Outer geometry
                     try:
-                        gx, gy, gz, gi, gj, gk = load_outer_geometry("validationCase.vtk")
+                        gx, gy, gz, gi, gj, gk = load_outer_geometry(vtk_path)
                         fig_slice3d.add_trace(go.Mesh3d(
                             x=gx,
                             y=gy,
