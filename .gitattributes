@@ -1,0 +1,4 @@
+AAU/validationCase.vtk filter=lfs diff=lfs merge=lfs -text
+AAU/validationCase.npz filter=lfs diff=lfs merge=lfs -text
+EMPA/validationCase.vtk filter=lfs diff=lfs merge=lfs -text
+EMPA/validationCase.npz filter=lfs diff=lfs merge=lfs -text
