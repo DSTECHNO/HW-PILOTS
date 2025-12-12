@@ -6,24 +6,29 @@ import pyvista as pv
 from scipy.interpolate import griddata
 import os
 import requests
-import streamlit as st
 
 @st.cache_data(show_spinner=False)
 def ensure_file(url: str, local_path: str) -> str:
     os.makedirs(os.path.dirname(local_path) or ".", exist_ok=True)
 
+    # Already exists?
     if os.path.exists(local_path) and os.path.getsize(local_path) > 0:
         return local_path
 
-    with st.spinner(f"Downloading {os.path.basename(local_path)}..."):
-        r = requests.get(url, stream=True, timeout=120)
-        r.raise_for_status()
-        tmp = local_path + ".part"
-        with open(tmp, "wb") as f:
-            for chunk in r.iter_content(chunk_size=1024 * 1024):
-                if chunk:
-                    f.write(chunk)
-        os.replace(tmp, local_path)
+    r = requests.get(url, stream=True, timeout=120)
+    r.raise_for_status()
+
+    tmp = local_path + ".part"
+    with open(tmp, "wb") as f:
+        for chunk in r.iter_content(chunk_size=1024 * 1024):
+            if chunk:
+                f.write(chunk)
+    os.replace(tmp, local_path)
+
+    if not os.path.exists(local_path) or os.path.getsize(local_path) == 0:
+        raise RuntimeError(f"Download failed or empty file: {local_path}")
+
+    return local_path
 
 # -------------------------------------------------
 # NPZ LOAD
