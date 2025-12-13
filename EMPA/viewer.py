@@ -408,11 +408,7 @@ with logo_col2:
 if view_tab == "About":
 
     # EMPA Building Image
-    st.image(
-        "https://raw.githubusercontent.com/DSTECHNO/HW_PILOTS/main/EMPA/empa.png",
-        caption="EMPA NEST",
-        width=500
-    )
+    st.image("EMPA/empa.png", caption="EMPA NEST", width=500)
 
     st.markdown("""
 ### Facility Information
