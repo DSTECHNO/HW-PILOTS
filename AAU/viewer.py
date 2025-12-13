@@ -393,11 +393,7 @@ with logo_col2:
 if view_tab == "About":
 
     # AAU Building Image
-    st.image(
-        "https://raw.githubusercontent.com/DSTECHNO/HW_PILOTS/main/AAU/aau.png",
-        caption="AAU BUILD - Institut for Byggeri, By og Miljø",
-        width=500
-    )
+    st.image("AAU/aau.png", caption="EMPA NEST", width=500)
 
     st.markdown("""
 ### Facility Information
