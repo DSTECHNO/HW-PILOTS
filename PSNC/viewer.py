@@ -748,7 +748,7 @@ elif view_tab == "Thermal Twin":
         st.markdown("<h3 style='font-size: 20px; font-weight: bold;'>📊 Summary Statistics</h3>", unsafe_allow_html=True)
         
         st.write("Minimum =", f"{field.min():.2f}")
-        st.write("Maximum =", f"[32.05}")
+        st.write("Maximum =", f"{32.05}")
         st.write("Mean T =", f"{field.mean():.2f}")
         st.write("Std. Dev.T =", f"{field.std():.2f}")
         
