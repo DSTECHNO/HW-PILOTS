@@ -474,8 +474,9 @@ if view_tab == "About":
     st.markdown("""
 ### Scientific Validation & Methodology
 
-The numerical model was validated using experimental test cases conducted at the EMPA NEST pilot data centre under different server utilization levels, workload distributions, total IT loads and cooling settings. During each test, cooling system parameters such as fan speed and valve opening ratio were adjusted to ensure stable operation, and IPMI-based measurements of air and water temperatures were recorded over 15-minute intervals and time-averaged. The same operating conditions, including measured cooling coil inlet water temperatures, were applied as boundary conditions in the CFD simulations. Simulated air temperatures and water outlet temperatures at the cooling coil outlets were directly compared with measurements, showing good agreement across all cases. The validation confirms that the Conjugate Heat Transfer (CHT) model accurately captures airflow recirculation, air–water heat exchange in the cooling coil, and temperature distributions within the data centre under realistic operating conditions. For a comprehensive analysis of the methodology and results, please refer to our published research.
-**Maximizing waste heat recovery from a building-integrated edge data center** - [Read the paper](https://www.nature.com/articles/s41598-025-22498-x)
+This interactive tool visualizes the thermal dynamics of the pilot data centre using a high-resolution Computational Fluid Dynamics (CFD) model. The simulation results have been rigorously validated against experimental measurements, including airflow velocities and server inlet temperatures, to ensure high accuracy. This validated digital twin forms the basis for our KPI-informed retrofitting strategies, demonstrating significant potential for energy efficiency improvements. For a comprehensive analysis of the methodology and results, please refer to our published research.
+
+**Energy efficiency enhancement in two European data centers through CFD modeling** - [Read the paper](https://www.nature.com/articles/s41598-025-11048-0)
 """)
 
     st.markdown("""
