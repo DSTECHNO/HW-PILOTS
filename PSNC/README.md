@@ -1,6 +1,6 @@
-# Thermal Digital Twin for AAU Data Centre
+# Thermal Digital Twin for PSNC Data Centre
 
-Interactive thermal digital twin visualization tool developed for Aalborg University data centre.
+Interactive thermal digital twin visualization tool developed for PSNC data centre.
 
 ## Features
 
