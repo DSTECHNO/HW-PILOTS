@@ -365,12 +365,12 @@ if view_tab == "Thermal Twin":
 
     # Default all data
     low_default = float(np.percentile(field, 0))
-    high_default = float(35.05)
+    high_default = float(32.15)
 
     value_min, value_max = st.sidebar.slider(
         f"{color_label} Range Filter",
         min_value=field_min,
-        max_value=35.05,
+        max_value=32.15,
         value=(low_default, high_default),
         help=f"Only show points between {color_label} = [{low_default:.2f}, {high_default:.2f}]"
     )
