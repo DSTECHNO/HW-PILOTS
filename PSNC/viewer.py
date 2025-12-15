@@ -836,11 +836,6 @@ elif view_tab == "Thermal Twin":
                 <td>1.35</td>
                 <td>⚠️ Overcooling and inefficient airflow management</td>
             </tr>
-            <tr>
-                <td><strong>LI</strong></td>
-                <td>142.10</td>
-                <td>⚠️ Leakage index</td>
-            </tr>
         </table>
         
         <div class="powered-by">Powered by D&S Tech</div>
