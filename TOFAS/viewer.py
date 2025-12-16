@@ -219,7 +219,7 @@ def density_aware_downsample(x, y, z, field, max_points: int, n_side: int = 40):
 # STREAMLIT SETTINGS
 # -------------------------------------------------
 st.set_page_config(
-    page_title="Thermal Digital Twin for PSNC Pilot",
+    page_title="Thermal Digital Twin for TOFAS Pilot",
     layout="wide"
 )
 
@@ -286,15 +286,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Thermal Twin for PSNC Pilot")
+st.title("Thermal Twin for TOFAS Pilot")
 
 HF_USER = "mkuzaay"  # örn: "DSTECHNO"
 
-NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCasePSNC.npz"
-VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCasePSNC.vtk"
+NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseTOFAS.npz"
+VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseTOFAS.vtk"
 
-npz_path = ensure_file(NPZ_URL, "validationCasePSNC.npz")
-vtk_path = ensure_file(VTK_URL, "validationCasePSNC.vtk")
+npz_path = ensure_file(NPZ_URL, "validationCaseTOFAS.npz")
+vtk_path = ensure_file(VTK_URL, "validationCaseTOFAS.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
 
@@ -444,8 +444,8 @@ with logo_col2:
 # -------------------------------------------------
 if view_tab == "About":
 
-    # PSNC Building Image
-    st.image("PSNC/psnc.jpg", caption="Poznan Supercomputing And Networking Center", width=500)
+    # TOFAS Building Image
+    st.image("TOFAS/tofas.jpg", caption="Poznan Supercomputing And Networking Center", width=500)
 
     st.markdown("""
 ### Facility Information
@@ -799,7 +799,7 @@ elif view_tab == "Thermal Twin":
         }
         </style>
         
-        <div class="kpi-title">KPI Assessment for PSNC Data Centre</div>
+        <div class="kpi-title">KPI Assessment for TOFAS Data Centre</div>
         
         <table class="kpi-table">
             <tr>
