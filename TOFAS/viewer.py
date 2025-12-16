@@ -137,7 +137,7 @@ def interpolate_slice(axis1_s, axis2_s, f_s, grid_resolution):
     return grid_axis1, grid_axis2, grid_field
 
 def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
-    if field_choice == "Temperature":
+    if field_choice == "T":
         if T_field is None:
             raise ValueError("NPZ does not contain 'T'. Check NPZ keys in sidebar.")
         field = T_field - 273.15
