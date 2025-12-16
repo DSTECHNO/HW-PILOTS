@@ -71,21 +71,17 @@ def load_npz_case(npz_filename: str, vtk_filename: str):
 
     keys = list(data.files)
 
-    # Temperature
+    # Eğer cell_T varsa, onu al
     if "cell_T" in keys:
         T = data["cell_T"]
-    elif "T" in keys:
-        T = data["T"]
     else:
-        T = None
+        T = data["T"] if "T" in keys else None
 
-    # Velocity
+    # Eğer cell_U varsa, onu al
     if "cell_U" in keys:
         U = data["cell_U"]
-    elif "U" in keys:
-        U = data["U"]
     else:
-        U = None
+        U = data["U"] if "U" in keys else None
 
     return mesh, T, U
 # -------------------------------------------------
@@ -311,6 +307,21 @@ npz_path = ensure_file(NPZ_URL, "validationCaseTOFAS.npz")
 vtk_path = ensure_file(VTK_URL, "validationCaseTOFAS.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
+st.sidebar.write("DEBUG INFO")
+st.sidebar.write("mesh.n_cells:", mesh.n_cells)
+st.sidebar.write("mesh.n_points:", mesh.n_points)
+
+if T_field is not None:
+    st.sidebar.write("T_field shape:", T_field.shape, "len:", len(T_field))
+else:
+    st.sidebar.write("T_field: None")
+
+if U_field is not None:
+    st.sidebar.write("U_field shape:", U_field.shape, "len:", len(U_field))
+else:
+    st.sidebar.write("U_field: None")
+
+st.sidebar.write("NPZ keys:", np.load(npz_path).files)
 
 
 x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "Temperature")
