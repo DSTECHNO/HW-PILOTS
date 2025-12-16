@@ -299,7 +299,7 @@ vtk_path = ensure_file(VTK_URL, "validationCaseTOFAS.vtk")
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
 
 
-x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "T")
+x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "cell_T")
 total_cells = x.size
 
 # -------------------------------------------------
