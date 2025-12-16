@@ -143,7 +143,7 @@ def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
         field = T_field - 273.15
         color_label = "T [°C]"
     else:
-        if U is None:
+        if U_field is None:
             raise ValueError("NPZ does not contain 'U'. Check NPZ keys in sidebar.")
         field = np.linalg.norm(U_field, axis=1)
         color_label = "|U| [m/s]"
