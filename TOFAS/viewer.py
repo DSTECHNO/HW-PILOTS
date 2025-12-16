@@ -291,10 +291,10 @@ st.title("Thermal Twin for TOFAS Pilot")
 HF_USER = "mkuzaay"  # örn: "DSTECHNO"
 
 NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/clip.npz"
-VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseTOFAS.vtk"
+VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/clip.vtk"
 
 npz_path = ensure_file(NPZ_URL, "clip.npz")
-vtk_path = ensure_file(VTK_URL, "validationCaseTOFAS.vtk")
+vtk_path = ensure_file(VTK_URL, "clip.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
 
