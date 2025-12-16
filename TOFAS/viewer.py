@@ -137,7 +137,7 @@ def interpolate_slice(axis1_s, axis2_s, f_s, grid_resolution):
     return grid_axis1, grid_axis2, grid_field
 
 def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
-    if field_choice == "T":
+    if field_choice == "Temperature":
         if T_field is None:
             raise ValueError("NPZ does not contain 'T'. Check NPZ keys in sidebar.")
         field = T_field - 273.15
@@ -219,7 +219,7 @@ def density_aware_downsample(x, y, z, field, max_points: int, n_side: int = 40):
 # STREAMLIT SETTINGS
 # -------------------------------------------------
 st.set_page_config(
-    page_title="Thermal Digital Twin for TOFAS Pilot",
+    page_title="Thermal Digital Twin for PSNC Pilot",
     layout="wide"
 )
 
@@ -286,15 +286,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("Thermal Twin for TOFAS Pilot")
+st.title("Thermal Twin for PSNC Pilot")
 
 HF_USER = "mkuzaay"  # örn: "DSTECHNO"
 
-NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/clip.npz"
-VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/clip.vtk"
+NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCasePSNC.npz"
+VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCasePSNC.vtk"
 
-npz_path = ensure_file(NPZ_URL, "clip.npz")
-vtk_path = ensure_file(VTK_URL, "clip.vtk")
+npz_path = ensure_file(NPZ_URL, "validationCasePSNC.npz")
+vtk_path = ensure_file(VTK_URL, "validationCasePSNC.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
 
@@ -365,7 +365,7 @@ if view_tab == "Thermal Twin":
 
     # Default all data
     low_default = float(np.percentile(field, 0))
-    high_default = float(np.percentile(field, 100))
+    high_default = float(32.15)
 
     value_min, value_max = st.sidebar.slider(
         f"{color_label} Range Filter",
@@ -444,32 +444,40 @@ with logo_col2:
 # -------------------------------------------------
 if view_tab == "About":
 
-    # TOFAS Building Image
-    st.image("TOFAS/tofas.jpg", caption="TOFAS Türk Otomobil Fabrikası A.Ş.", width=500)
+    # PSNC Building Image
+    st.image("PSNC/psnc.jpg", caption="Poznan Supercomputing And Networking Center", width=500)
 
     st.markdown("""
 ### Facility Information
-- **Location:** Bursa, Türkiye
+- **Location:** Poznan, Poland
 - **Cooling Technology:** Air cooling infrastructure
 
 ### IT Infrastructure
-- **Number of Server Racks:** 16 Racks (45 Servers)
-- **Total IT Capacity:** 20.062 kW
-- **Rack Power Range:** 0 W - 5848 W
+- **Number of Server Racks:** 2 Racks (9 Servers)
+- **Total IT Capacity:** 3.778 kW
+- **Rack Power Range:** 836 W - 2942 W
 - **Configuration:** Variable thermal loads
 
 ### Cooling System
 - **Cooling Method:** Air-based cooling units
-- **Number of Cooling Units:** 4 (2 active)
-- **Air Flow Rate:** 0.889 kg/s each
+- **Number of Cooling Units:** 2 (excluding 1 ventilation)
+- **Total Cooling Capacity:** 4.68 kW
+- **Air Flow Rate:** 0.6421 kg/s each
 
 ### Operating Conditions
-- **Ambient Temperature:** 17°C
-- **Inlet Air Temperature:** 18.1°C
-- **Outlet Air Temperature:** 24.7°C
-- **Rack Air Flow:** 0.6-5.68 kg/s
+- **Ambient Temperature:** 20°C
+- **Inlet Air Temperature:** 18.7°C
+- **Outlet Air Temperature:** 25.0°C
+- **Rack Air Flow:** 0.212 kg/s
 """)
 
+    st.markdown("""
+### Scientific Validation & Methodology
+
+This interactive tool visualizes the thermal dynamics of the pilot data centre using a high-resolution Computational Fluid Dynamics (CFD) model. The simulation results have been rigorously validated against experimental measurements, including airflow velocities and server inlet temperatures, to ensure high accuracy. This validated digital twin forms the basis for our KPI-informed retrofitting strategies, demonstrating significant potential for energy efficiency improvements. For a comprehensive analysis of the methodology and results, please refer to our published research.
+
+**Energy efficiency enhancement in two European data centers through CFD modeling** - [Read the paper](https://www.nature.com/articles/s41598-025-11048-0)
+""")
 
     st.markdown("""
 ---
@@ -741,7 +749,7 @@ elif view_tab == "Thermal Twin":
         st.markdown("<h3 style='font-size: 20px; font-weight: bold;'>📊 Summary Statistics</h3>", unsafe_allow_html=True)
         
         st.write("Minimum =", f"{field.min():.2f}")
-        st.write("Maximum =", f"{field.max():.2f}")
+        st.write("Maximum =", f"{32.05}")
         st.write("Mean T =", f"{field.mean():.2f}")
         st.write("Std. Dev.T =", f"{field.std():.2f}")
         
@@ -791,7 +799,7 @@ elif view_tab == "Thermal Twin":
         }
         </style>
         
-        <div class="kpi-title">KPI Assessment for TOFAS Data Centre</div>
+        <div class="kpi-title">KPI Assessment for PSNC Data Centre</div>
         
         <table class="kpi-table">
             <tr>
