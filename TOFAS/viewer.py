@@ -308,23 +308,6 @@ npz_path = ensure_file(NPZ_URL, "validationCaseTOFAS_filter.npz")
 vtk_path = ensure_file(VTK_URL, "validationCaseTOFAS.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
-st.sidebar.write("DEBUG INFO")
-st.sidebar.write("mesh.n_cells:", mesh.n_cells)
-st.sidebar.write("mesh.n_points:", mesh.n_points)
-
-if T_field is not None:
-    st.sidebar.write("T_field shape:", T_field.shape, "len:", len(T_field))
-else:
-    st.sidebar.write("T_field: None")
-
-if U_field is not None:
-    st.sidebar.write("U_field shape:", U_field.shape, "len:", len(U_field))
-else:
-    st.sidebar.write("U_field: None")
-
-st.sidebar.write("NPZ keys:", np.load(npz_path).files)
-
-
 x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "Temperature")
 total_cells = x.size
 
@@ -382,12 +365,12 @@ else:
 
     # Default all data
     low_default = float(np.percentile(field, 0))
-    high_default = float(32.15)
+    high_default = float(np.percentile(field, 100))
 
     value_min, value_max = st.sidebar.slider(
         f"{color_label} Range Filter",
         min_value=field_min,
-        max_value=32.15,
+        max_value=field_max,
         value=(low_default, high_default),
         help=f"Only show points between {color_label} = [{low_default:.2f}, {high_default:.2f}]"
     )
