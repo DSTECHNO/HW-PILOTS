@@ -455,7 +455,7 @@ if view_tab == "About":
 ### IT Infrastructure
 - **Number of Server Racks:** 16 Racks
 - **Total IT Capacity:** 19 kW
-- **Rack Power Range:** xxx W - xxx W
+- **Rack Power Range:** 852 W - 5848 W
 - **Configuration:** Variable thermal loads
 
 ### Cooling System
