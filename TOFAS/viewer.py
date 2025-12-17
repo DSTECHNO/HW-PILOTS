@@ -465,7 +465,7 @@ if view_tab == "About":
 - **Air Flow Rate:** xxx kg/s each
 
 ### Operating Conditions
-- **Ambient Temperature:** xx°C
+- **Ambient Temperature:** 17°C
 - **Inlet Air Temperature:** 23°C
 - **Outlet Air Temperature:** 47°C
 - **Rack Air Flow:** xxx kg/s
