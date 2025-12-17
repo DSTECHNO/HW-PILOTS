@@ -453,7 +453,7 @@ if view_tab == "About":
 - **Cooling Technology:** Air cooling infrastructure
 
 ### IT Infrastructure
-- **Number of Server Racks:** 16 Racks
+- **Number of Server Racks:** 43 Racks
 - **Total IT Capacity:** 19 kW
 - **Rack Power Range:** 852 W - 5848 W
 - **Configuration:** Variable thermal loads
@@ -461,14 +461,11 @@ if view_tab == "About":
 ### Cooling System
 - **Cooling Method:** Air-based cooling units
 - **Number of Cooling Units:** 4 (2 active)
-- **Total Cooling Capacity:** xxx kW
-- **Air Flow Rate:** xxx kg/s each
 
 ### Operating Conditions
 - **Ambient Temperature:** 17°C
 - **Inlet Air Temperature:** 23°C
 - **Outlet Air Temperature:** 47°C
-- **Rack Air Flow:** xxx kg/s
 """)
     
     st.markdown("""
