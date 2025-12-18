@@ -69,11 +69,35 @@ def load_npz_case(npz_filename: str, vtk_filename: str):
     data = np.load(npz_filename, mmap_mode="r")
     mesh = pv.read(vtk_filename)
 
-    keys = list(data.files)
-    T = data["T"] if "T" in keys else None
-    U = data["U"] if "U" in keys else None
+    if isinstance(mesh, pv.MultiBlock):
+        mesh = mesh.combine()
 
-    return mesh, T, U
+    keys = set(data.files)
+
+    # Aday field'ler
+    T_point = data["T"] if "T" in keys else None
+    U_point = data["U"] if "U" in keys else None
+
+    T_cell  = data["cell_T"] if "cell_T" in keys else None
+    U_cell  = data["cell_U"] if "cell_U" in keys else None
+
+    # Mesh ile otomatik eşleştir
+    if T_cell is not None and T_cell.size == mesh.n_cells:
+        T_field, U_field = T_cell, U_cell
+        field_location = "cell"
+    elif T_point is not None and T_point.size == mesh.n_points:
+        T_field, U_field = T_point, U_point
+        field_location = "point"
+    else:
+        raise ValueError(
+            f"NPZ fields do not match this VTK mesh. "
+            f"mesh.n_cells={mesh.n_cells}, mesh.n_points={mesh.n_points}, "
+            f"T.size={None if T_point is None else T_point.size}, "
+            f"cell_T.size={None if T_cell is None else T_cell.size}"
+        )
+
+    return mesh, T_field, U_field, field_location
+
 # -------------------------------------------------
 # OUTER GEOMETRY (FROM VTK) LOAD
 # -------------------------------------------------
@@ -296,7 +320,9 @@ VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/mai
 npz_path = ensure_file(NPZ_URL, "ValidEMPA.npz")
 vtk_path = ensure_file(VTK_URL, "ValidEMPA.vtk")
 
-mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
+mesh, T_field, U_field, field_location = load_npz_case(npz_path, vtk_path)
+st.sidebar.write("Using field location:", field_location)
+
 
 
 x, y, z, field, color_label = get_coords_and_field(mesh, T_field, U_field, "Temperature")
