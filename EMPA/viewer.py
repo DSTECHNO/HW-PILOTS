@@ -73,30 +73,30 @@ def load_npz_case(npz_filename: str, vtk_filename: str):
         mesh = mesh.combine()
 
     keys = set(data.files)
-
-    # Aday field'ler
     T_point = data["T"] if "T" in keys else None
     U_point = data["U"] if "U" in keys else None
-
     T_cell  = data["cell_T"] if "cell_T" in keys else None
     U_cell  = data["cell_U"] if "cell_U" in keys else None
 
-    # Mesh ile otomatik eşleştir
-    if T_cell is not None and T_cell.size == mesh.n_cells:
-        T_field, U_field = T_cell, U_cell
-        field_location = "cell"
-    elif T_point is not None and T_point.size == mesh.n_points:
-        T_field, U_field = T_point, U_point
-        field_location = "point"
-    else:
-        raise ValueError(
-            f"NPZ fields do not match this VTK mesh. "
-            f"mesh.n_cells={mesh.n_cells}, mesh.n_points={mesh.n_points}, "
-            f"T.size={None if T_point is None else T_point.size}, "
-            f"cell_T.size={None if T_cell is None else T_cell.size}"
-        )
+    # ---- DEBUG: ekrana bas ----
+    st.sidebar.markdown("### Debug (mesh vs npz)")
+    st.sidebar.write("mesh type:", type(mesh))
+    st.sidebar.write("mesh.n_points:", mesh.n_points)
+    st.sidebar.write("mesh.n_cells:", mesh.n_cells)
+    st.sidebar.write("T.size:", None if T_point is None else int(T_point.size))
+    st.sidebar.write("cell_T.size:", None if T_cell is None else int(T_cell.size))
+    st.sidebar.write("NPZ keys:", sorted(list(keys))[:20], "…")
 
-    return mesh, T_field, U_field, field_location
+    # ---- EŞLEŞTİRME ----
+    if T_cell is not None and T_cell.size == mesh.n_cells:
+        return mesh, T_cell, U_cell, "cell"
+    if T_point is not None and T_point.size == mesh.n_points:
+        return mesh, T_point, U_point, "point"
+
+    # burada raise yerine ekranda ERROR göster ve stop
+    st.error("NPZ field sizes do not match this VTK mesh. Check sidebar debug numbers.")
+    st.stop()
+
 
 # -------------------------------------------------
 # OUTER GEOMETRY (FROM VTK) LOAD
