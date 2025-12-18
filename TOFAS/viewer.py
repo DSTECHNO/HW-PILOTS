@@ -420,7 +420,7 @@ with logo_col2:
 # ABOUT PAGE
 # -------------------------------------------------
 if view_tab == "About":
-    st.image("TOFAS/tofas.png", caption="Tofaş Türk Otomobil Fabrikası A.Ş.", width=200)
+    st.image("TOFAS/tofas.png", caption="Tofaş Türk Otomobil Fabrikası A.Ş.", width=500)
 
     st.markdown("""
 ### Facility Information
