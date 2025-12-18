@@ -307,12 +307,12 @@ if view_tab == "Thermal Twin":
 
     if field_choice == "Temperature":
         field_min = float(field.min())
-        field_max = 30.10  # 🔒 sabit
+        field_max = 30.10
         low_default = field_min
         high_default = field_max
     else:
         field_min = float(field.min())
-        field_max = float(field.max())  # 🔓 serbest
+        field_max = float(2.1)
         low_default = field_min
         high_default = field_max
 
