@@ -369,7 +369,7 @@ else:
 
     value_min, value_max = st.sidebar.slider(
         f"{color_label} Range Filter",
-        min_value=field_min,
+        min_value=15.0,
         max_value=30.1,
         value=(low_default, high_default),
         help=f"Only show points between {color_label} = [{low_default:.2f}, {high_default:.2f}]"
