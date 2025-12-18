@@ -291,10 +291,10 @@ st.title("Thermal Twin for EMPA Pilot")
 HF_USER = "mkuzaay"  # örn: "DSTECHNO"
 
 NPZ_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseEMPA.npz"
-VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/validationCaseEMPA.vtk"
+VTK_URL = f"https://huggingface.co/datasets/{HF_USER}/hw-pilots-data/resolve/main/ValidEMPA.vtk"
 
 npz_path = ensure_file(NPZ_URL, "validationCaseEMPA.npz")
-vtk_path = ensure_file(VTK_URL, "validationCaseEMPA.vtk")
+vtk_path = ensure_file(VTK_URL, "ValidEMPA.vtk")
 
 mesh, T_field, U_field = load_npz_case(npz_path, vtk_path)
 
