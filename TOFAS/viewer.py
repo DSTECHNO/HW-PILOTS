@@ -148,32 +148,15 @@ def interpolate_slice(axis1_s, axis2_s, f_s, grid_resolution):
 
 def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
     if field_choice == "Temperature":
-        field = T_field - 273.15  # K → °C
+        if T_field is None:
+            raise ValueError("NPZ does not contain temperature field (T/cell_T).")
+        field = T_field - 273.15
         color_label = "T [°C]"
-
-        field_min = float(field.min())
-        field_max = 30.1  # 🔒 Temperature için sabit üst sınır
-
-        low_default = field_min
-        high_default = 30.1
-
-    else:  # Airflow Velocity
+    else:
+        if U_field is None:
+            raise ValueError("NPZ does not contain velocity field (U/cell_U).")
         field = np.linalg.norm(U_field, axis=1)
         color_label = "|U| [m/s]"
-
-        field_min = float(field.min())
-        field_max = float(field.max())  # 🔓 U için serbest
-
-        low_default = field_min
-        high_default = field_max
-
-    value_min, value_max = st.sidebar.slider(
-        f"{color_label} Range Filter",
-        min_value=field_min,
-        max_value=field_max,
-        value=(low_default, high_default),
-        help=f"Only show points between {color_label}"
-    )
 
     field = np.asarray(field)
     if field.ndim == 2 and field.shape[1] == 1:
@@ -185,8 +168,7 @@ def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
         pts = mesh.points
     else:
         raise ValueError(
-            f"Field length ({len(field)}) != n_cells ({mesh.n_cells}) "
-            f"and != n_points ({mesh.n_points})."
+            f"Field length ({len(field)}) != n_cells ({mesh.n_cells}) and != n_points ({mesh.n_points})."
         )
 
     x, y, z = pts[:, 0], pts[:, 1], pts[:, 2]
@@ -357,9 +339,6 @@ if view_tab == "Thermal Twin":
     field_choice = st.sidebar.selectbox("Field to Display", ["Temperature", "Airflow Velocity"])
 mode = st.sidebar.selectbox("View Mode", ["3D Scatter", "2D Slice"]) if view_tab == "Thermal Twin" else None
 
-# ---- DEFAULT RANGE (always defined to prevent NameError) ----
-value_min = float(field.min())
-value_max = float(30.1)
 
 # Slice axis selection (only for 2D mode)
 if view_tab == "Thermal Twin" and mode == "2D Slice":
