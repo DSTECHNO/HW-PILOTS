@@ -504,9 +504,9 @@ elif view_tab == "Thermal Twin":
         z_plot = z_plot[mask_range]
         f_plot = f_plot[mask_range]
         
-        # Colorbar limits (istersen global kalabilir, istersen slider aralığına göre daraltırsın)
-        cmin = float(value_min)
-        cmax = float(value_max)
+        # Colorbar limit
+        cmin = float(15.0)
+        cmax = float(31.0)
 
         # -----------------------------------------
         # 3D SCATTER
