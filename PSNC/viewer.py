@@ -350,29 +350,37 @@ else:
     grid_resolution = 700
 
 
-# Field selection
+# -------------------------------------------------
+# FIELD SELECTION + RANGE SLIDER
+# -------------------------------------------------
 if view_tab == "Thermal Twin":
+
     if field_choice == "Temperature":
-        field = T_field - 273.15  # Convert Kelvin to Celsius
+        field = T_field - 273.15  # K → °C
         color_label = "T [°C]"
-    else:
+
+        field_min = float(field.min())
+        field_max = 32.15  # 🔒 Temperature için sabit üst sınır
+
+        low_default = field_min
+        high_default = 32.15
+
+    else:  # Airflow Velocity
         field = np.linalg.norm(U_field, axis=1)
         color_label = "|U| [m/s]"
 
-    # ---- RANGE SLIDER: SHOW ONLY POINTS IN SELECTED VALUE RANGE ----
-    field_min = float(field.min())
-    field_max = float(field.max())
+        field_min = float(field.min())
+        field_max = float(field.max())  # 🔓 U için serbest
 
-    # Default all data
-    low_default = float(np.percentile(field, 0))
-    high_default = float(32.15)
+        low_default = field_min
+        high_default = field_max
 
     value_min, value_max = st.sidebar.slider(
         f"{color_label} Range Filter",
         min_value=field_min,
-        max_value=32.15,
+        max_value=field_max,
         value=(low_default, high_default),
-        help=f"Only show points between {color_label} = [{low_default:.2f}, {high_default:.2f}]"
+        help=f"Only show points between {color_label}"
     )
     
 # Point count slider: 10000-50000
