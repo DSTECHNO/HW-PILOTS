@@ -336,6 +336,10 @@ if view_tab == "Thermal Twin":
     field_choice = st.sidebar.selectbox("Field to Display", ["Temperature", "Airflow Velocity"])
 mode = st.sidebar.selectbox("View Mode", ["3D Scatter", "2D Slice"]) if view_tab == "Thermal Twin" else None
 
+# ---- DEFAULT RANGE (always defined to prevent NameError) ----
+value_min = float(field.min())
+value_max = float(30.1)
+
 # Slice axis selection (only for 2D mode)
 if view_tab == "Thermal Twin" and mode == "2D Slice":
     slice_axis = st.sidebar.selectbox("Slice Axis", ["X", "Y", "Z"])
