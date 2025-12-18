@@ -152,10 +152,10 @@ def get_coords_and_field(mesh, T_field, U_field, field_choice: str):
         color_label = "T [°C]"
 
         field_min = float(field.min())
-        field_max = 32.15  # 🔒 Temperature için sabit üst sınır
+        field_max = 30.1  # 🔒 Temperature için sabit üst sınır
 
         low_default = field_min
-        high_default = 32.15
+        high_default = 30.1
 
     else:  # Airflow Velocity
         field = np.linalg.norm(U_field, axis=1)
