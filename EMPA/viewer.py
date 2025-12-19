@@ -798,7 +798,7 @@ elif view_tab == "Thermal Twin":
         }
         </style>
         
-        <div class="kpi-title">KPI Assessment for AAU Data Centre</div>
+        <div class="kpi-title">KPI Assessment for EMPA Data Centre</div>
         
         <table class="kpi-table">
             <tr>
