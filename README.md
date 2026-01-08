@@ -36,3 +36,16 @@ The NPZ file must contain the following data:
 ---
 
 **Developed by**: DSTECH Team
+
+---
+
+## License
+
+Copyright © 2026 Design and Simulation Technologies Inc.
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPLv3)**; see the LICENSE file for details.
+
+**Commercial Use & Dual Licensing**
+This software is provided under the AGPLv3 to support the open-source community. This ensures that any modifications tailored for network use (SaaS) must be shared back with the community.
+
+If you require a proprietary license for commercial use (e.g., to include this software in a closed-source product, for internal enterprise use without copyleft restrictions, or for dedicated support), please contact **Design and Simulation Technologies Inc.** regarding our Enterprise License options.
