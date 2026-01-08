@@ -1,6 +1,7 @@
 # DC-T²: Thermal Twin for Data Centres
 
 DC-T² (Data Centre Thermal Twin) is an open-source, web-based platform that transforms CFD-based thermal modeling into an accessible and collaborative digital twin for data centres. DC-T² enables rapid exploration of thermal scenarios, identification of inefficiencies and evaluation of operational strategies, empowering data-centre stakeholders with actionable, decision-ready thermal insight across the entire facility lifecycle.
+
 Unlike classical CFD workflows that remain confined to local machines and static reports, DC-T² allows the thermal suitability and performance of a data centre to be shared seamlessly with operators, designers and decision-makers. Thermal insights can be communicated interactively—without the need for intensive software installations, dense simulation setups, or lengthy reporting—making thermal intelligence accessible even within fast-paced operational environments.
 
 ## Features
