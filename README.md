@@ -44,10 +44,6 @@ The NPZ file must contain the following data:
   
 ---
 
-**Developed by**: DSTECH Team
-
----
-
 ## License
 
 Copyright © 2026 Design and Simulation Technologies Inc.
