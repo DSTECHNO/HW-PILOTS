@@ -3,17 +3,13 @@ DC-T² (Data Centre Thermal Twin) is an open-source, web-based platform that tra
 DC-T² enables rapid exploration of thermal scenarios, identification of inefficiencies and evaluation of operational strategies, empowering data-centre stakeholders with actionable, decision-ready thermal insight across the entire facility lifecycle.
 Unlike classical CFD workflows that remain confined to local machines and static reports, DC-T² allows the thermal suitability and performance of a data centre to be shared seamlessly with operators, designers and decision-makers. Thermal insights can be communicated interactively—without the need for intensive software installations, dense simulation setups, or lengthy reporting—making thermal intelligence accessible even within fast-paced operational environments.
 ## Why DC-T²?
-
-**🚀 Instant Deployment, Zero Installation**  
+**➤ Instant Deployment, Zero Installation**  
 No complex CFD software setup required. Deploy your thermal twin in minutes and share it with stakeholders through a simple web link—accessible from any device, anywhere.
-
-**🎯 From Simulation to Decision**  
+**➤ From Simulation to Decision**  
 Transform static CFD results into interactive insights. Explore 3D thermal distributions, slice through critical zones, and assess KPIs in real-time to make data-driven decisions faster.
-
-**🔬 Validated Engineering Foundation**  
-Built on peer-reviewed methodology and validated against experimental data. DC-T² bridges the gap between high-fidelity CFD simulation and practical operational intelligence.
-
-**💡 Continuous Thermal Monitoring**  
+**➤ Validated Engineering Foundation**  
+Built on peer-reviewed methodology and validated against experimental data. DC-T² bridges the gap between high-fidelity CFD simulation and practical operational intelligence
+**➤ Continuous Thermal Monitoring**  
 Move beyond one-time assessments. Track thermal performance over time, benchmark against industry standards, and continuously improve data centre efficiency.
 ## Features
 - **3D Point Cloud Visualization**: Three-dimensional temperature and airflow distribution of the data centre
