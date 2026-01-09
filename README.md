@@ -38,9 +38,9 @@ The NPZ file must contain the following data:
 - `U`: Velocity vector field (m/s)
 
 ## Typical Use Cases
-- KPI-based thermal performance assessment of existing data-center facilities
+- KPI-based thermal performance assessment of existing data-centre facilities
 - Identification of thermal bottlenecks and inefficiencies through KPI trends
-- Identification of thermal bottlenecks and inefficiencies through KPI trends
+- Visualization of airflow and temperature distributions within the data centre
   
 ---
 
